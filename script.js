@@ -1,53 +1,153 @@
-console.log('Hey js is linked')
+// !! Actualiser les computerSelection et humanSelection suivant les parties
+// créer fonction pour xChoice = xSelection ?
+// !! Revoir la structure et la mettre en entière dans playGame
+
+// !! Revoir incrément des partie pour en avoir 5 même si égalités
 
 
-//1 ordi choisi aléatoirement (p)ierre, (f)euille, (c)iseaux 
 
-let computerChoice = Math.floor(Math.random() * 3)
+//1 ordi choisi aléatoirement (p)ierre, (f)euille, (c)iseaux
+
+
+
+let humanScore = 0
+let computerScore = 0
+let nbRound = 0
+
 
 function getComputerChoice () {
+
+let computerChoice = Math.floor(Math.random() * 3)
+let computerSelection
     if (computerChoice === 0) {
-        console.log("Le choix de l'ordi est : pierre")
+    console.log("Le choix de l'ordi est : pierre");
+   computerSelection = "pierre";
+    return computerSelection;
     }
     else if (computerChoice === 1) {
-        console.log("Le choix de l'ordi est :feuille")
+        console.log("Le choix de l'ordi est : feuille");
+  computerSelection = "feuille";
+        return computerSelection ;
     }
 
-    else { console.log("Le choix de l'ordi est : ciseaux")}
+    else if (computerChoice === 2) {
+        console.log("Le choix de l'ordi est : ciseaux");
+   computerSelection = "ciseaux";
+        return computerSelection;
+    }
 
 }
-
-getComputerChoice()
+ 
 
 //2 humain choisi pierre, feuille, sciceaux
 
 function getHumanChoice () {
-   let humanChoice = prompt("Pierre, Feuille, Ciseaux ?")
 
-   if (humanChoice == "pierre" || humanChoice ==  "Pierre" || 
-    humanChoice ==  "feuille" || humanChoice ==  "Feuille" ||
-    humanChoice ==  "Ciseaux" || humanChoice ==  "ciseaux") {
-    console.log("you choose " + humanChoice)
+    let x = prompt("Pierre, Feuille, Ciseaux ?")
+    let humanChoice = x.toLowerCase()
+
+   if (humanChoice == "pierre" || humanChoice ==  "feuille"
+    || humanChoice ==  "ciseaux") {
+    console.log("Vous avez choisi : " + humanChoice)
+    return humanChoice
    }
-   else { console.log("you enter incorrect value") }
+   else { console.log("Tu n'as pas rentrer le bon mot") }
 }
 
-getHumanChoice()
 
-// déclarer le score des joueurs
-
-let humanScore = 0
-let computerScore = 0
 
 // La logic pour jouer un Round
 
-// et stock donnée dans une variale
-//
-// 3 comparaison des résultats
-// Pierre > sciceaux
-// Feuille > pierre
-// sciceaux > feuille
-// possible égalitées
-//
-// 4 retouner le resultat du choix de l'ordinateur et de l'humain 
-// en disant qui a gagner
+function playRound (humanChoice, computerChoice) {
+
+    if (humanChoice == "pierre" && computerChoice == "feuille") {
+        console.log("PERDU ! Tu as jouer pierre et la machine feuille");
+        computerScore++;
+        return computerScore;
+        }
+
+    else if (humanChoice == "pierre" && computerChoice == "ciseaux") {
+        console.log("GAGNé ! Tu as joué Pierre et La machine Ciseaux");
+        humanScore++;
+        return humanScore;
+    }
+
+    else if (humanChoice =="pierre" && computerChoice == "pierre") {
+        console.log("EGALITé ! Rejouer");
+        return
+    }
+
+    else if (humanChoice == "feuille" && computerChoice == "ciseaux") {
+        console.log("PERDU ! T'as joué feuille et coupe coupe le ciseaux !");
+        computerScore++;
+        return computerScore;
+    }
+
+    else if  (humanChoice == "feuille" && computerChoice == "pierre") {
+        console.log("HeHe YOU WIN ! Feuille contre Pierre");
+        humanScore++
+        return humanScore;
+    }
+
+    else if (humanChoice == "feuille" && computerChoice == "feuille") {
+        console.log("EGALITé ! Rejouer");
+        return;
+    }
+
+    else if (humanChoice == "ciseaux" && computerChoice == "pierre") {
+        console.log("LOSE ! Ciseaux contre Pierre");
+        computerScore++;
+        return computerScore;
+    }
+
+    else if (humanChoice == "ciseaux" && computerChoice == "feuille") {
+        console.log("Hey GAGNE ! Ciseaux contre Feuille");
+        humanScore++;
+        return humanScore;
+    }
+
+    else if (humanChoice == "ciseaux" && computerChoice == "ciseaux") {
+        console.log("EGALITé ! Rejouer");
+        return;
+    }
+
+}
+
+
+round5(nbRound)
+
+
+function round5(nbRound)  {
+if (nbRound < 5) {
+    playGame()
+}
+ else if (humanScore < computerScore) {
+        console.log("FIN DU JEU : PERDU ... Vous êtes à " + humanScore + ", tandis que la machine est à " + computerScore + " points")
+}
+
+else if (humanScore > computerScore) {
+    console.log("FIN DU JEU : WhAY BRAVO !!! Vous êtes à " + humanScore + ", tandis que la machine est à " + computerScore + " points")
+}
+
+else if (humanScore = computerScore) {
+    console.log("FIN DU JEU : EGALITé !! Vous êtes à " + humanScore + ", tandis que la machine est à " + computerScore + " points")
+}
+}
+
+function playGame() {
+      console.log("Round " + (nbRound + 1) + "/ 5" )
+        let humanSelection = getHumanChoice();   
+        let computerSelection = getComputerChoice();
+
+        playRound(humanSelection, computerSelection)
+        console.log("Vous êtes à " + humanScore + ", tandis que la machine est à " + computerScore + " points");  
+        nbRound++
+        return nbRound
+
+}
+
+round5(nbRound)
+round5(nbRound)
+round5(nbRound)
+round5(nbRound)
+round5(nbRound)
